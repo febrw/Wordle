@@ -15,6 +15,7 @@ public class WordleApp
 
     public WordleApp() throws FileNotFoundException, IOException {
         loadWordlist("src/test/resources/wordlist-test.txt");
+        randChooseNewWordle();
     }
 
     public static void main( String[] args )
@@ -30,8 +31,6 @@ public class WordleApp
         System.out.println("Thanks for playing!");
     }
 
-    // Unimplemented skeleton
-    // You may refactor this method
     public void loadWordlist(String wordlistPath) throws FileNotFoundException, IOException
     {
         BufferedReader reader = new BufferedReader(new FileReader(wordlistPath));
@@ -48,7 +47,12 @@ public class WordleApp
         return wordList;
     }
 
+    // create random double in the range: [0, size of wordList)
+    // cast to int returns an int in the range: [0, size of wordList) == [0, size of wordList -1]
+    // use this random int to select a wordle
     public void randChooseNewWordle() {
+        final int randomIndex = (int) (Math.random() * wordList.size());
+        this.wordle = wordList.get(randomIndex);
     }
 
     public String getWordle() {
