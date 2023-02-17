@@ -11,13 +11,18 @@ import java.io.IOException;
 public class WordleApp
 {
     private ArrayList<String> wordList;
+    private String wordle;
+
+    public WordleApp() throws FileNotFoundException, IOException {
+        loadWordlist("src/test/resources/wordlist-test.txt");
+    }
 
     public static void main( String[] args )
     {
         System.out.println("Welcome to CS5031 - Wordle");
-        WordleApp wordle = new WordleApp();
+        WordleApp wordle;
         try {
-            wordle.loadWordlist("src/test/resources/wordlist-test.txt");
+            wordle = new WordleApp();
         } catch (IOException e) {
             System.out.println("Word List could not be loaded, exiting.");
             return;
@@ -41,6 +46,13 @@ public class WordleApp
 
     public ArrayList<String> getWordList() {
         return wordList;
+    }
+
+    public void randChooseNewWordle() {
+    }
+
+    public String getWordle() {
+        return wordle;
     }
     
 }
