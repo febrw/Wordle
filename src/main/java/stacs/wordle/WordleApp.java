@@ -7,16 +7,19 @@ import java.util.Scanner;
 import java.io.BufferedReader;
 import java.nio.file.Path;
 import java.io.IOException;
+//import stacs.wordle.Result;
 
 public class WordleApp
 {
     private ArrayList<String> wordList;
     private String wordle;
 
+    private static final String DEFAULT_WORDLIST_PATH = "src/main/resources/wordlist.txt";
+
     public WordleApp() throws FileNotFoundException, IOException {
-        loadWordlist("src/test/resources/wordlist-test.txt");
+        loadWordlist(DEFAULT_WORDLIST_PATH);
         randChooseNewWordle();
-    }
+    }     
 
     public static void main( String[] args )
     {
@@ -57,6 +60,21 @@ public class WordleApp
 
     public String getWordle() {
         return wordle;
+    }
+
+    public void processGuess(String guess, int guessNumber)
+    {
+
+    }
+
+    public void setWordle(String wordle)
+    {
+
+    }
+
+    public Result[] getResultForGuess(int guessNumber)
+    {
+        return new Result[1];
     }
     
 }

@@ -43,4 +43,14 @@ public class WordleAppTest
         assertTrue(app.getWordList().contains(app.getWordle()));
     }
 
+    @Test
+    public void allGreys()
+    {
+        Result[] greys = {Result.GREY, Result.GREY, Result.GREY, Result.GREY , Result.GREY}; 
+        app.setWordle("scale");
+        String guess = "grump";
+        app.processGuess(guess, 0);
+        assertEquals(app.getResultForGuess(0), greys);
+    }
+
 }
