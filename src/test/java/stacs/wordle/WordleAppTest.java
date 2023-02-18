@@ -52,4 +52,5 @@ public class WordleAppTest
         String guess = "ggppp";
         assertTrue(!app.isValidInput(guess));
     }
+
 }

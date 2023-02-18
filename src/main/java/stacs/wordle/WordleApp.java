@@ -32,6 +32,7 @@ public class WordleApp
             return;
         }
 
+        // wordle.runGame();
         System.out.println("Thanks for playing!");
 
     }
@@ -112,9 +113,13 @@ public class WordleApp
         return results[guessNumber];
     }
 
-    
-    public boolean isValidInput(String guess) {
-        return true;
+    public boolean isValidInput(String input) {
+        String guess = input.trim().toLowerCase();
+        return (wordList.contains(guess));
+    }
+
+    public boolean isWordle(String guess) {
+        return wordle.equals(guess);
     }
     
 }

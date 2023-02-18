@@ -10,7 +10,7 @@ import java.io.IOException;
 public class GuessTest
 {
     public static final String TEST_WORDLIST_PATH = "src/test/resources/wordlist-test.txt";
-    
+
     private WordleApp app;
 
     @BeforeEach
@@ -20,7 +20,21 @@ public class GuessTest
     }
 
     @Test
-    public void getResultforGuessBadTest()
+    public void guessMatchesWordle() {
+        String guess = "whine";
+        app.setWordle("whine");
+        assertTrue(app.isWordle(guess));
+    }
+
+    @Test
+    public void guessMismatchesWordle() {
+        String guess = "quick";
+        app.setWordle("whine");
+        assertTrue(!app.isWordle(guess));
+    }
+
+    @Test
+    public void getResultforGuessBad()
     {
         IndexOutOfBoundsException oob = assertThrows(
             IndexOutOfBoundsException.class,
