@@ -1,23 +1,24 @@
 package stacs.wordle;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.BufferedReader;
-import java.nio.file.Path;
+
+//import java.nio.file.Path;
 import java.io.IOException;
 import java.lang.IndexOutOfBoundsException;
-//import stacs.wordle.Result;
+import java.io.FileNotFoundException;
+
 
 public class WordleApp
 {
+    private static final String DEFAULT_WORDLIST_PATH = "src/main/resources/wordlist.txt";
+
     private ArrayList<String> wordList;
     private String wordle;
     private String[] guesses;
     private Result[][] results;
+    private InputOutput view;
     
-    private static final String DEFAULT_WORDLIST_PATH = "src/main/resources/wordlist.txt";
+   
     private static final int WORD_LENGTH = 5;
     private static final int MAX_GUESSES = 6;
 
@@ -25,34 +26,26 @@ public class WordleApp
         System.out.println("Welcome to CS5031 - Wordle");
         WordleApp wordle;
         try {
-            wordle = new WordleApp();
+            wordle = new WordleApp(DEFAULT_WORDLIST_PATH);
         } catch (IOException e) {
             System.out.println("Word List could not be loaded, exiting.");
             return;
         }
+
         System.out.println("Thanks for playing!");
+
     }
 
 
-    public WordleApp() throws FileNotFoundException, IOException {
-        loadWordlist(DEFAULT_WORDLIST_PATH);
-        randChooseNewWordle();
+    public WordleApp(String wordlistPath) throws FileNotFoundException, IOException {
+        wordList = InputOutput.loadWordlist(wordlistPath);
+        sampleNewWordle();
         guesses = new String[MAX_GUESSES];
         results = new Result[MAX_GUESSES][WORD_LENGTH];
     }     
 
     
-    public void loadWordlist(String wordlistPath) throws FileNotFoundException, IOException
-    {
-        BufferedReader reader = new BufferedReader(new FileReader(wordlistPath));
-        ArrayList<String> wordList = new ArrayList<String>();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            wordList.add(line);
-        }
-        reader.close();
-        this.wordList = wordList;
-    }
+    
 
     public ArrayList<String> getWordList() {
         return wordList;
@@ -61,7 +54,7 @@ public class WordleApp
     // create random double in the range: [0, size of wordList)
     // cast to int returns an int in the range: [0, size of wordList) == [0, size of wordList -1]
     // use this random int to select a wordle
-    public void randChooseNewWordle() {
+    public void sampleNewWordle() {
         final int randomIndex = (int) (Math.random() * wordList.size());
         this.wordle = wordList.get(randomIndex);
     }
@@ -108,6 +101,7 @@ public class WordleApp
         }  
     }
 
+    // for testing only
     protected void setWordle(String wordle)
     {
         this.wordle = wordle;
@@ -116,6 +110,11 @@ public class WordleApp
     public Result[] getResultForGuess(int guessNumber) throws IndexOutOfBoundsException
     {
         return results[guessNumber];
+    }
+
+    
+    public boolean isValidInput(String guess) {
+        return true;
     }
     
 }

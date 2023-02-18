@@ -7,14 +7,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class GuessTests
+public class GuessTest
 {
+    public static final String TEST_WORDLIST_PATH = "src/test/resources/wordlist-test.txt";
+    
     private WordleApp app;
 
     @BeforeEach
     public void setup() throws FileNotFoundException, IOException
     {
-        app = new WordleApp();
+        app = new WordleApp(TEST_WORDLIST_PATH);
     }
 
     @Test
