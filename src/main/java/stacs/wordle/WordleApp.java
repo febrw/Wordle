@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import java.io.IOException;
 import java.lang.IndexOutOfBoundsException;
 import java.io.FileNotFoundException;
+import java.lang.IllegalArgumentException;
 
+import java.util.NoSuchElementException;
+import java.lang.IllegalStateException;
 
 public class WordleApp
 {
@@ -16,7 +19,7 @@ public class WordleApp
     private String wordle;
     private String[] guesses;
     private Result[][] results;
-    private InputOutput view;
+    //private InputOutput view;
     
    
     private static final int WORD_LENGTH = 5;
@@ -32,9 +35,13 @@ public class WordleApp
             return;
         }
 
-        // wordle.runGame();
-        System.out.println("Thanks for playing!");
-
+        try {
+            wordle.runGame();
+            //System.out.println("Thanks for playing!");
+        } catch (IllegalStateException | NoSuchElementException e) {
+            System.out.println("Error reading from standard input, Scanner no longer available. Exiting...");
+            System.exit(1);
+        }
     }
 
 
@@ -43,7 +50,40 @@ public class WordleApp
         sampleNewWordle();
         guesses = new String[MAX_GUESSES];
         results = new Result[MAX_GUESSES][WORD_LENGTH];
-    }     
+    }
+
+    public void runGame() throws IllegalStateException, NoSuchElementException {
+        // IO welcome to game
+        // press any key to start, or type "!quit" to quit
+
+        
+        int guessCounter = 0;
+        String guess;
+        do {
+            // print board
+            // print enter guess message
+            // IO get guess
+            guess = InputOutput.getUserInput().toLowerCase();
+            // check quit
+            if (InputOutput.quitRequested(guess)) {
+                // clear screen
+                System.out.println("Thanks for playing!");
+                return;
+            } else {
+                try {
+                    validateInput(guess);
+                } catch (IllegalArgumentException iae) {
+                    System.out.println(iae.getMessage());
+                    continue;
+                }
+                processGuess(guess, guessCounter);
+                ++guessCounter;
+            }
+        }
+        while (guessCounter < MAX_GUESSES);
+
+        // IO print score and exit
+    }
 
     
     
@@ -112,14 +152,28 @@ public class WordleApp
     {
         return results[guessNumber];
     }
-
+    /*
     public boolean isValidInput(String input) {
         String guess = input.trim().toLowerCase();
         return (wordList.contains(guess));
-    }
+    } */
 
     public boolean isWordle(String guess) {
         return wordle.equals(guess);
     }
     
+    // argument guess lowercased by this point
+    public void validateInput(String guess) throws IllegalArgumentException {
+        if (guess.length() != 5) {
+            throw new IllegalArgumentException("Your guess must be 5 characters long!");
+        }
+
+        if (!guess.chars().allMatch(Character::isLetter)) {
+            throw new IllegalArgumentException("Letters only please!");
+        }
+
+        if (!wordList.contains(guess)) {
+            throw new IllegalArgumentException("Word not in dictionary");
+        }
+    }
 }

@@ -33,11 +33,20 @@ public class InputOutput {
     {
         return scanner.next();
     }
- 
 
     protected static void cleanUp()
     {
         scanner.close();
+    }
+
+    /* implementation
+    protected static boolean quitRequested(String userInput) {
+        return (userInput.equals("!quit"));
+    } */
+
+    // stub
+    protected static boolean quitRequested(String userInput) {
+        return false;
     }
 
 }
