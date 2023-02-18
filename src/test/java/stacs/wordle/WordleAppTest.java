@@ -51,7 +51,7 @@ public class WordleAppTest
         app.setWordle("scale");
         String guess = "grump";
         app.processGuess(guess, 0);
-        assertEquals(app.getResultForGuess(0), greys);
+        assertArrayEquals(app.getResultForGuess(0), greys);
     }
 
     // Anagram Test
@@ -62,7 +62,7 @@ public class WordleAppTest
         app.setWordle("space");
         String guess = "paces";
         app.processGuess(guess, 0);
-        assertEquals(app.getResultForGuess(0), yellows);
+        assertArrayEquals(app.getResultForGuess(0), yellows);
     }
 
     @Test
@@ -72,7 +72,7 @@ public class WordleAppTest
         app.setWordle("lunch");
         String guess = "lunch";
         app.processGuess(guess, 0);
-        assertEquals(app.getResultForGuess(0), greens);
+        assertArrayEquals(app.getResultForGuess(0), greens);
     }
 
 
@@ -85,7 +85,7 @@ public class WordleAppTest
         app.setWordle("eagle");
         String guess = "eerie";
         app.processGuess(guess, 0);
-        assertEquals(app.getResultForGuess(0), expected);
+        assertArrayEquals(app.getResultForGuess(0), expected);
     }
 
     // mix of greens and yellows only
@@ -96,7 +96,7 @@ public class WordleAppTest
         app.setWordle("angle");
         String guess = "angel";
         app.processGuess(guess, 0);
-        assertEquals(app.getResultForGuess(0), expected);
+        assertArrayEquals(app.getResultForGuess(0), expected);
     }
 
     @Test
@@ -106,7 +106,7 @@ public class WordleAppTest
         app.setWordle("elbow");
         String guess = "below";
         app.processGuess(guess, 0);
-        assertEquals(app.getResultForGuess(0), expected);
+        assertArrayEquals(app.getResultForGuess(0), expected);
     }
 
     @Test
@@ -116,7 +116,7 @@ public class WordleAppTest
         app.setWordle("scalp");
         String guess = "claps";
         app.processGuess(guess, 0);
-        assertEquals(app.getResultForGuess(0), expected);
+        assertArrayEquals(app.getResultForGuess(0), expected);
     }
 
 
@@ -128,7 +128,7 @@ public class WordleAppTest
         app.setWordle("range");
         String guess = "naval";
         app.processGuess(guess, 0);
-        assertEquals(app.getResultForGuess(0), expected);
+        assertArrayEquals(app.getResultForGuess(0), expected);
     }
 
     @Test
@@ -138,7 +138,7 @@ public class WordleAppTest
         app.setWordle("range");
         String guess = "navel";
         app.processGuess(guess, 0);
-        assertEquals(app.getResultForGuess(0), expected);
+        assertArrayEquals(app.getResultForGuess(0), expected);
     }
 
     @Test
@@ -148,7 +148,7 @@ public class WordleAppTest
         app.setWordle("orbit");
         String guess = "track";
         app.processGuess(guess, 0);
-        assertEquals(app.getResultForGuess(0), expected);
+        assertArrayEquals(app.getResultForGuess(0), expected);
     }
 
     // StudRes tests
@@ -159,7 +159,7 @@ public class WordleAppTest
         app.setWordle("ounce");
         String guess = "dream";
         app.processGuess(guess, 0);
-        assertEquals(app.getResultForGuess(0), expected);
+        assertArrayEquals(app.getResultForGuess(0), expected);
     }
 
     @Test
@@ -169,7 +169,7 @@ public class WordleAppTest
         app.setWordle("ounce");
         String guess = "radio";
         app.processGuess(guess, 0);
-        assertEquals(app.getResultForGuess(0), expected);
+        assertArrayEquals(app.getResultForGuess(0), expected);
     }
 
     @Test
@@ -179,7 +179,7 @@ public class WordleAppTest
         app.setWordle("ounce");
         String guess = "table";
         app.processGuess(guess, 0);
-        assertEquals(app.getResultForGuess(0), expected);
+        assertArrayEquals(app.getResultForGuess(0), expected);
     }
 
     @Test
@@ -189,7 +189,7 @@ public class WordleAppTest
         app.setWordle("ounce");
         String guess = "snack";
         app.processGuess(guess, 0);
-        assertEquals(app.getResultForGuess(0), expected);
+        assertArrayEquals(app.getResultForGuess(0), expected);
     }
 
     @Test
@@ -199,7 +199,7 @@ public class WordleAppTest
         app.setWordle("ounce");
         String guess = "noise";
         app.processGuess(guess, 0);
-        assertEquals(app.getResultForGuess(0), expected);
+        assertArrayEquals(app.getResultForGuess(0), expected);
     }
 
 
@@ -210,12 +210,16 @@ public class WordleAppTest
         app.setWordle("ounce");
         String guess = "ounce";
         app.processGuess(guess, 0);
-        assertEquals(app.getResultForGuess(0), expected);
+        assertArrayEquals(app.getResultForGuess(0), expected);
     }
 
-   
 
-
-
+    @Test
+    public void getResultforGuessBadTest()
+    {
+        IndexOutOfBoundsException oob = assertThrows(
+            IndexOutOfBoundsException.class,
+            () -> app.getResultForGuess(7));
+    }
 
 }
