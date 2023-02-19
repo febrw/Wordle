@@ -44,7 +44,7 @@ public class GuessTest
     @Test
     public void allGreys()
     {
-        Result[] greys = {Result.GREY, Result.GREY, Result.GREY, Result.GREY , Result.GREY}; 
+        Result[] greys = {Result.RED, Result.RED, Result.RED, Result.RED , Result.RED}; 
         app.setWordle("scale");
         String guess = "grump";
         app.processGuess(guess, 0);
@@ -77,7 +77,7 @@ public class GuessTest
     @Test
     public void duplicateLetterNotRematched()
     {
-        Result[] expected = {Result.GREEN, Result.GREY, Result.GREY, Result.GREY, Result.GREEN}; 
+        Result[] expected = {Result.GREEN, Result.RED, Result.RED, Result.RED, Result.GREEN}; 
         app.setWordle( "eagle");
         String guess = "eerie";
         app.processGuess(guess, 0);
@@ -120,7 +120,7 @@ public class GuessTest
     @Test
     public void mixedTest1()
     {
-        Result[] expected = {Result.YELLOW, Result.GREEN, Result.GREY, Result.GREY, Result.GREY}; 
+        Result[] expected = {Result.YELLOW, Result.GREEN, Result.RED, Result.RED, Result.RED}; 
         app.setWordle( "range");
         String guess = "naval";
         app.processGuess(guess, 0);
@@ -130,7 +130,7 @@ public class GuessTest
     @Test
     public void mixedTest2()
     {
-        Result[] expected = {Result.YELLOW, Result.GREEN, Result.GREY, Result.YELLOW, Result.GREY}; 
+        Result[] expected = {Result.YELLOW, Result.GREEN, Result.RED, Result.YELLOW, Result.RED}; 
         app.setWordle( "range");
         String guess = "navel";
         app.processGuess(guess, 0);
@@ -140,7 +140,7 @@ public class GuessTest
     @Test
     public void mixedTest3()
     {
-        Result[] expected = {Result.YELLOW, Result.GREEN, Result.GREY, Result.GREY, Result.GREY}; 
+        Result[] expected = {Result.YELLOW, Result.GREEN, Result.RED, Result.RED, Result.RED}; 
         app.setWordle( "orbit");
         String guess = "track";
         app.processGuess(guess, 0);
@@ -151,7 +151,7 @@ public class GuessTest
     @Test
     public void studResTest1()
     {
-        Result[] expected = {Result.GREY, Result.GREY, Result.YELLOW, Result.GREY, Result.GREY}; 
+        Result[] expected = {Result.RED, Result.RED, Result.YELLOW, Result.RED, Result.RED}; 
         app.setWordle( "ounce");
         String guess = "dream";
         app.processGuess(guess, 0);
@@ -161,7 +161,7 @@ public class GuessTest
     @Test
     public void studResTest2()
     {
-        Result[] expected = {Result.GREY, Result.GREY, Result.GREY, Result.GREY, Result.YELLOW}; 
+        Result[] expected = {Result.RED, Result.RED, Result.RED, Result.RED, Result.YELLOW}; 
         app.setWordle( "ounce");
         String guess = "radio";
         app.processGuess(guess, 0);
@@ -171,7 +171,7 @@ public class GuessTest
     @Test
     public void studResTest3()
     {
-        Result[] expected = {Result.GREY, Result.GREY, Result.GREY, Result.GREY, Result.GREEN}; 
+        Result[] expected = {Result.RED, Result.RED, Result.RED, Result.RED, Result.GREEN}; 
         app.setWordle( "ounce");
         String guess = "table";
         app.processGuess(guess, 0);
@@ -181,7 +181,7 @@ public class GuessTest
     @Test
     public void studResTest4()
     {
-        Result[] expected = {Result.GREY, Result.YELLOW, Result.GREY, Result.GREEN, Result.GREY}; 
+        Result[] expected = {Result.RED, Result.YELLOW, Result.RED, Result.GREEN, Result.RED}; 
         app.setWordle( "ounce");
         String guess = "snack";
         app.processGuess(guess, 0);
@@ -191,7 +191,7 @@ public class GuessTest
     @Test
     public void studResTest5()
     {
-        Result[] expected = {Result.YELLOW, Result.YELLOW, Result.GREY, Result.GREY, Result.GREEN}; 
+        Result[] expected = {Result.YELLOW, Result.YELLOW, Result.RED, Result.RED, Result.GREEN}; 
         app.setWordle( "ounce");
         String guess = "noise";
         app.processGuess(guess, 0);
@@ -207,6 +207,71 @@ public class GuessTest
         String guess = "ounce";
         app.processGuess(guess, 0);
         assertArrayEquals(app.getResultForGuess(0), expected);
-    } 
+    }
+
+    @Test
+    public void kioskTest1()
+    {
+        Result[] expected = {Result.RED, Result.RED, Result.RED, Result.RED, Result.RED};
+        app.setWordle( "kiosk");
+        String guess = "where";
+        app.processGuess(guess, 0);
+        assertArrayEquals(app.getResultForGuess(0), expected);
+    }
+
+
+    @Test
+    public void kioskTest2()
+    {
+        Result[] expected = {Result.RED, Result.YELLOW, Result.RED, Result.RED, Result.RED};
+        app.setWordle( "kiosk");
+        String guess = "polyp";
+        app.processGuess(guess, 0);
+        assertArrayEquals(app.getResultForGuess(0), expected);
+    }
+
+
+    @Test
+    public void kioskTest3()
+    {
+        Result[] expected = {Result.YELLOW, Result.RED, Result.RED, Result.RED, Result.RED};
+        app.setWordle( "kiosk");
+        String guess = "stand";
+        app.processGuess(guess, 0);
+        assertArrayEquals(app.getResultForGuess(0), expected);
+    }
+
+
+    @Test
+    public void kioskTest4()
+    {
+        Result[] expected = {Result.YELLOW, Result.YELLOW, Result.RED, Result.YELLOW, Result.RED};
+        app.setWordle( "kiosk");
+        String guess = "solid";
+        app.processGuess(guess, 0);
+        assertArrayEquals(app.getResultForGuess(0), expected);
+    }
+
+
+    @Test
+    public void kioskTest5()
+    {
+        Result[] expected = {Result.RED, Result.GREEN, Result.RED, Result.RED, Result.RED};
+        app.setWordle( "kiosk");
+        String guess = "miner";
+        app.processGuess(guess, 0);
+        assertArrayEquals(app.getResultForGuess(0), expected);
+    }
+
+
+    @Test
+    public void kioskTest6()
+    {
+        Result[] expected = {Result.RED, Result.GREEN, Result.RED, Result.YELLOW, Result.YELLOW};
+        app.setWordle( "kiosk");
+        String guess = "biros";
+        app.processGuess(guess, 0);
+        assertArrayEquals(app.getResultForGuess(0), expected);
+    }
 
 }

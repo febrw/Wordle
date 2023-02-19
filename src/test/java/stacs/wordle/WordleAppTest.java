@@ -65,5 +65,4 @@ public class WordleAppTest
             () -> app.validateInput(guess));
         assertEquals(iae.getMessage(), "Not in dictionary: " + guess);
     }
- 
 }

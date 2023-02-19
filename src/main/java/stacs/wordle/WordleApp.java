@@ -98,8 +98,9 @@ public class WordleApp
                 // win
                 InputOutput.clearScreen();
                 InputOutput.printBoard(this, guessCounter);
+                String s = (guessCounter > 1 ? " guesses!" : " guess!");
+                System.out.println("You got it in " + guessCounter + s);
                 System.out.println("Well Done!");
-                // score?
                 return;
             }
             
@@ -108,7 +109,11 @@ public class WordleApp
         InputOutput.clearScreen();
         InputOutput.printBoard(this, guessCounter);
         System.out.println("Nice try, the wordle was: " + wordle);
-    } 
+    }
+
+    private int getScore(int guessCounter) {
+       return 0; 
+    }
 
     /** sampleNewWordle randomly samples a new wordle from this wordle's wordlist, modifying this app's wordle. */
     public void sampleNewWordle() {
@@ -154,7 +159,7 @@ public class WordleApp
             }
             // No match, set to red
             if (!resultFilled[i]) {
-                results[guessNumber][i] = Result.GREY;
+                results[guessNumber][i] = Result.RED;
             }
         }  
     }
