@@ -63,47 +63,7 @@ public class WordleAppTest
         IllegalArgumentException iae = assertThrows(
             IllegalArgumentException.class,
             () -> app.validateInput(guess));
-        assertEquals(iae.getMessage(), "Word not in dictionary");
+        assertEquals(iae.getMessage(), "Not in dictionary: " + guess);
     }
  
-    /*
-    @Test
-    public void inputTooShort()
-    {
-        String guess = "gh";
-        assertTrue(!app.isValidInput(guess));
-    }
-
-    @Test
-    public void inputTooLong()
-    {
-        String guess = "xxfzwwdd";
-        assertTrue(!app.isValidInput(guess));
-    }
-
-    @Test
-    public void inputNonAlpha()
-    {
-        String guess = "a2au9";
-        assertTrue(!app.isValidInput(guess));
-    }
-
-    
-    @Test
-    public void guessNotInWordList()
-    {
-        String guess = "ggppp";
-        assertTrue(!app.isValidInput(guess));
-    }
-    */
-
-    @Test // NYI
-    public void noMoreThanSixGuesses() {
-        String badGuess = "thumb";
-        String wordle = "quite";
-
-        app.setWordle(wordle);
-        
-    }
-
 }
